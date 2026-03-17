@@ -1,0 +1,47 @@
+name: Feature Request
+description: File a feature request.
+title: "[Feat]: "
+labels: ["feature", "triage"]
+projects: ["Koudmain/Koudmain-web", "Koudmain/Koudmain-backend", "Koudmain/Koudmain-mobile-worker", "Koudmain/Koudmain-mobile-client"]
+type: feature
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to suggest a feature!
+  - type: dropdown
+    id: project
+    attributes:
+      label: Impacted project
+      description: Which project is this feature request for?
+      options:
+        - Koudmain-web
+        - Koudmain-backend
+        - Koudmain-mobile-worker
+        - Koudmain-mobile-client
+    validations:
+      required: true
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: Describe the feature you want to add.
+      placeholder: Tell us what you want to add!
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: What should be true for this feature to be considered done?
+      placeholder: "- [ ]"
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://koudmain.fr/code-of-conduct).
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
