@@ -34,7 +34,10 @@ body:
     attributes:
       label: Acceptance Criteria
       description: What should be true for this feature to be considered done?
-      placeholder: "- [ ]"
+      placeholder: |
+        - [ ] The feature does X...
+        - [ ] The feature does Y...
+        - [ ] The feature does Z...
     validations:
       required: true
   - type: checkboxes
