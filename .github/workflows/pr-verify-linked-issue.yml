@@ -14,3 +14,5 @@ jobs:
         uses: hattan/verify-linked-issue-action@v1.1.0
         env:
           GITHUB_TOKEN: ${{ secrets.ORG_PAT }}
+        with:
+          message: "Error: No issue is linked to this Pull Request. Please link an issue by adding a reference (e.g., 'Closes #123') to the PR description."
