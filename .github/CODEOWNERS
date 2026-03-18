@@ -1,0 +1,5 @@
+# Docker files code owner
+
+**/Dockerfile @Koudmain/Koudmain-team-devops
+**/.dockerignore @Koudmain/Koudmain-team-devops
+**/docker-compose.* @Koudmain/Koudmain-team-devops
