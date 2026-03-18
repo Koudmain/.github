@@ -1,9 +1,13 @@
-name: "Verify issue"
+name: Verify issue
 
 on:
   pull_request:
     types: [edited, synchronize, opened, reopened]
   check_run:
+  workflow_call:
+    secrets:
+      ORG_PAT:
+        required: true
 
 jobs:
   verify_linked_issue:
@@ -15,4 +19,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ORG_PAT }}
         with:
-          message: "Error: No issue is linked to this Pull Request. Please link an issue by adding a reference (e.g., 'Closes #123') to the PR description."
+          message: "Error: No issue is linked to this Pull Request. Please link an issue by adding a reference (e.g., 'Closes #123' or 'Fixes #123') to the PR description."
