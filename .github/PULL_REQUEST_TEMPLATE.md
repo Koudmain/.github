@@ -1,27 +1,17 @@
 ## 🎯 What is the purpose of this PR?
 
-(Detail the changes here. What does this PR solve or implement?)
+<!-- Detail the changes here. What does this PR solve or implement? -->
 
-**Related Issue:** Fixes # (issue number)
-
----
-
-## 🏗️ Services Impacted
-*Select the impacted services depending on your PR*
-- [ ] 🐳 **Docker / Infrastructure**
-- [ ] 🔙 **Backend / API**
-- [ ] 🌐 **Web Frontend**
-- [ ] 📱 **Mobile App (Client)**
-- [ ] 📱 **Mobile App (Business)**
+**Related Issue:** Fixes #(issue number)
 
 ---
 
 ## Type of change
-- [ ] 🐛 **Bug fix** (Fixing an existing issue)
-- [ ] 🚀 **Feature** (New feature implementation)
-- [ ] ♻️ **Refactor** (Code improvement without functional changes)
-- [ ] ⚙️ **Chore / Config** (Dependency updates, Dockerfile, CI/CD)
-- [ ] 📚 **Documentation**
+- [ ] 🐛 **Bug fix** (Fixing an existing issue) <!-- TaskRadio type -->
+- [ ] 🚀 **Feature** (New feature implementation) <!-- TaskRadio type -->
+- [ ] ♻️ **Refactor** (Code improvement without functional changes) <!-- TaskRadio type -->
+- [ ] ⚙️ **Chore / Config** (Dependency updates, Dockerfile, CI/CD) <!-- TaskRadio type -->
+- [ ] 📚 **Documentation** <!-- TaskRadio type -->
 
 ---
 
