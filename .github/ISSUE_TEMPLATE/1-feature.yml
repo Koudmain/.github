@@ -40,11 +40,3 @@ body:
         - [ ] The feature does Z...
     validations:
       required: true
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://koudmain.fr/code-of-conduct).
-      options:
-        - label: I agree to follow this project's Code of Conduct
-          required: true
