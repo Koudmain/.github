@@ -1,0 +1,63 @@
+name: Reusable Code Quality (Lint & Format)
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: 'The Node.js version to use'
+        required: false
+        type: string
+        default: '24'
+
+jobs:
+  quality-check:
+    name: Lint & Format
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v6
+
+      - name: 🟢 Setup Node.js (${{ inputs.node-version }})
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🎨 Check formatting (Prettier)
+        id: prettier
+        run: npm run format:check
+
+      - name: 💬 Post PR Comment on Prettier Failure
+        if: failure() && steps.prettier.outcome == 'failure'
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: prettier-error
+          message: |
+            ### ❌ Formatting Error (Prettier)
+            
+            It looks like some files are not formatted correctly. 
+            Don't worry! Just run this command locally and push again:
+            
+            ```bash
+            npm run format:fix
+            ```
+
+      # Improvements can be made with use of reviewdog
+      - name: 🕵️ Check code quality (ESLint)
+        id: eslint
+        run: npm run lint:check
+
+      - name: 💬 Post PR Comment on ESLint Failure
+        if: failure() && steps.eslint.outcome == 'failure'
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: eslint-error
+          message: |
+            ### ❌ Code Quality Error (ESLint)
+            
+            It looks like some files are not formatted correctly. 
+            You need to check the ESLint logs for more details.
