@@ -19,6 +19,7 @@ body:
         - Koudmain-backend
         - Koudmain-mobile-worker
         - Koudmain-mobile-client
+        - Koudmain-documentation
     validations:
       required: true
   - type: textarea
