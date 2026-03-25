@@ -1,0 +1,25 @@
+name: Sync Labels
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: srealmoreno/label-sync-action@v2
+        with:
+          token: ${{ secrets.ORG_PAT }}
+          clean-labels: true
+          repositories: |
+            Koudmain/Koudmain-backend
+            Koudmain/Koudmain-web
+            Koudmain/Koudmain-mobile-worker
+            Koudmain/Koudmain-mobile-client
+            Koudmain/Koudmain-workspace
+            Koudmain/Koudmain-documentation
+            Koudmain/Koudmain-bruno
+            Koudmain/.github
+
