@@ -1,13 +1,13 @@
-name: Feature Request
-description: File a feature request.
-title: "[Feat]: "
-labels: ["feature"]
-type: feature
+name: Technical Task / Refactor
+description: File a technical task / refactor.
+title: "[Task]: "
+labels: ["refactor"]
+type: refactor
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to suggest a feature!
+        Thanks for taking the time to suggest technical changes!
   - type: dropdown
     id: project
     attributes:
@@ -23,10 +23,10 @@ body:
     validations:
       required: true
   - type: textarea
-    id: feature-description
+    id: task-description
     attributes:
-      label: Feature Description
-      description: Describe the feature you want to add.
+      label: Task Description
+      description: Describe the task you want to add.
       placeholder: Tell us what you want to add!
     validations:
       required: true

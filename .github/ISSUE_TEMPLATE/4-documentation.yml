@@ -1,13 +1,13 @@
-name: Feature Request
-description: File a feature request.
-title: "[Feat]: "
-labels: ["feature"]
-type: feature
+name: Documentation Update
+description: File a documentation.
+title: "[Docs]: "
+labels: ["docs"]
+type: docs
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to suggest a feature!
+        Thanks for taking the time to complete documentation!
   - type: dropdown
     id: project
     attributes:
@@ -20,14 +20,6 @@ body:
         - Koudmain-mobile-worker
         - Koudmain-mobile-client
         - Koudmain-documentation
-    validations:
-      required: true
-  - type: textarea
-    id: feature-description
-    attributes:
-      label: Feature Description
-      description: Describe the feature you want to add.
-      placeholder: Tell us what you want to add!
     validations:
       required: true
   - type: textarea
