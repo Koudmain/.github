@@ -52,6 +52,15 @@
   description: "Non-critical task, backlog item, or minor UI adjustment."
 
 # --- STATUS (Workflow) ---
+- name: "wip"
+  color: "28a745"
+  description: "PR work in progress."
+- name: "to review"
+  color: "ab27d2"
+  description: "PR to review."
+- name: "to merge"
+  color: "669999"
+  description: "Pr to merge."
 - name: "triage"
   color: "eeeeee"
   description: "New ticket waiting to be reviewed and assigned."
