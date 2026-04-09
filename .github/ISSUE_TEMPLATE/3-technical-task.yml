@@ -1,8 +1,15 @@
 name: Technical Task / Refactor
 description: File a technical task / refactor.
 title: "[Task]: "
-labels: ["refactor"]
-type: refactor
+labels: ["task"]
+projects:
+  [
+    "Koudmain/Koudmain-web",
+    "Koudmain/Koudmain-backend",
+    "Koudmain/Koudmain-mobile-worker",
+    "Koudmain/Koudmain-mobile-client",
+  ]
+type: task
 body:
   - type: markdown
     attributes:

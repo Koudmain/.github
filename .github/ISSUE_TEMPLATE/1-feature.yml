@@ -2,6 +2,13 @@ name: Feature Request
 description: File a feature request.
 title: "[Feat]: "
 labels: ["feature"]
+projects:
+  [
+    "Koudmain/Koudmain-web",
+    "Koudmain/Koudmain-backend",
+    "Koudmain/Koudmain-mobile-worker",
+    "Koudmain/Koudmain-mobile-client",
+  ]
 type: feature
 body:
   - type: markdown

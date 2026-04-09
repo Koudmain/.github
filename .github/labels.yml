@@ -8,7 +8,7 @@
 - name: "docs"
   color: "0075ca"
   description: "Improvements or updates to README, API docs, or technical specs."
-- name: "refactor"
+- name: "task"
   color: "e6e6e6"
   description: "Code maintenance or structural changes without new features."
 

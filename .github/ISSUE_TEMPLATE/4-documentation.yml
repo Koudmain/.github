@@ -1,33 +1,51 @@
 name: Documentation Update
-description: File a documentation.
+description: File a documentation update or new documentation.
 title: "[Docs]: "
 labels: ["docs"]
 type: docs
+projects: ["Koudmain/documentation"]
 body:
   - type: markdown
     attributes:
       value: |
         Thanks for taking the time to complete documentation!
-  - type: dropdown
-    id: project
+  - type: textarea
+    id: documentation-subject
     attributes:
-      label: Impacted project
-      description: Which project is this feature request for?
+      label: What needs to be documented?
+      description: Describe clearly what should be documented. Be specific about the feature, API endpoint, process, or functionality.
+      placeholder: |
+        Example: The new authentication API endpoints (login, logout, refresh token)
+        - What are the endpoints?
+        - What parameters do they accept?
+        - What are the expected responses?
+        - Any code examples needed?
+    validations:
+      required: true
+  - type: dropdown
+    id: documentation-type
+    attributes:
+      label: Type of documentation
+      description: What type of documentation is this?
       options:
-        - All
-        - Koudmain-web
-        - Koudmain-backend
-        - Koudmain-mobile-worker
-        - Koudmain-mobile-client
-        - Koudmain-documentation
+        - API Documentation
+        - User Guide
+        - Developer Guide
+        - Setup/Installation Guide
+        - Troubleshooting Guide
+        - Architecture Documentation
+        - Tutorial
+        - FAQ
+        - Other
     validations:
       required: true
   - type: textarea
-    id: acceptance-criteria
+    id: documentation-context
     attributes:
-      label: Acceptance Criteria
-      description: What should be true for this feature to be considered done?
+      label: Additional Context
+      description: Provide any additional information that might help with the documentation (links to code, PRs, issues, existing docs to reference, etc.)
       placeholder: |
-        - [ ] The feature does X...
-        - [ ] The feature does Y...
-        - [ ] The feature does Z...
+        - Link to PR or code:
+        - Existing documentation to reference:
+        - Technical details or examples:
+        - Resources:
