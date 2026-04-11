@@ -61,7 +61,7 @@
 - name: "to merge"
   color: "669999"
   description: "Pr to merge."
-  name: "to fix"
+- name: "to fix"
   color: "2600f0"
   description: "PR to fix"
 - name: "triage"
