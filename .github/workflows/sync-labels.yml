@@ -20,6 +20,7 @@ jobs:
             Koudmain/Koudmain-mobile-client
             Koudmain/Koudmain-workspace
             Koudmain/Koudmain-documentation
+            Koudmain/Koudmain-worker
             Koudmain/Koudmain-bruno
             Koudmain/.github
 
