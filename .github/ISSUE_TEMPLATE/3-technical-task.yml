@@ -2,33 +2,12 @@ name: Technical Task / Refactor
 description: File a technical task / refactor.
 title: "[Task]: "
 labels: ["task"]
-projects:
-  [
-    "Koudmain/Koudmain-web",
-    "Koudmain/Koudmain-backend",
-    "Koudmain/Koudmain-mobile-worker",
-    "Koudmain/Koudmain-mobile-client",
-  ]
 type: task
 body:
   - type: markdown
     attributes:
       value: |
         Thanks for taking the time to suggest technical changes!
-  - type: dropdown
-    id: project
-    attributes:
-      label: Impacted project
-      description: Which project is this feature request for?
-      options:
-        - All
-        - Koudmain-web
-        - Koudmain-backend
-        - Koudmain-mobile-worker
-        - Koudmain-mobile-client
-        - Koudmain-documentation
-    validations:
-      required: true
   - type: textarea
     id: task-description
     attributes:
