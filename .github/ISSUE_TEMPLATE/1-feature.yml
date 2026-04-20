@@ -2,33 +2,12 @@ name: Feature Request
 description: File a feature request.
 title: "[Feat]: "
 labels: ["feature"]
-projects:
-  [
-    "Koudmain/Koudmain-web",
-    "Koudmain/Koudmain-backend",
-    "Koudmain/Koudmain-mobile-worker",
-    "Koudmain/Koudmain-mobile-client",
-  ]
 type: feature
 body:
   - type: markdown
     attributes:
       value: |
         Thanks for taking the time to suggest a feature!
-  - type: dropdown
-    id: project
-    attributes:
-      label: Impacted project
-      description: Which project is this feature request for?
-      options:
-        - All
-        - Koudmain-web
-        - Koudmain-backend
-        - Koudmain-mobile-worker
-        - Koudmain-mobile-client
-        - Koudmain-documentation
-    validations:
-      required: true
   - type: textarea
     id: feature-description
     attributes:
