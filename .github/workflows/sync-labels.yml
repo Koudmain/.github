@@ -18,6 +18,7 @@ jobs:
             Koudmain/Koudmain-web
             Koudmain/Koudmain-mobile-worker
             Koudmain/Koudmain-mobile-client
+            Koudmain/Koudmain-mobile
             Koudmain/Koudmain-workspace
             Koudmain/Koudmain-documentation
             Koudmain/Koudmain-worker
