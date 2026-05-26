@@ -1,0 +1,42 @@
+name: "Orchestrator - Events & Automation"
+
+on:
+  workflow_call:
+    inputs:
+      target-repo-url:
+        type: string
+        required: false
+    secrets:
+      ORG_PAT:
+        required: true
+      GITLAB_SSH_PRIVATE_KEY:
+        required: true
+
+jobs:
+  add-to-project:
+    name: "Auto Configure Project"
+    if: github.event.action == 'opened'
+    uses: Koudmain/.github/.github/workflows/auto-add-project.yml@main
+    secrets:
+      ORG_PAT: ${{ secrets.ORG_PAT }}
+
+  verify-issue:
+    name: "Verify Linked Issue"
+    if: github.event_name == 'pull_request'
+    uses: Koudmain/.github/.github/workflows/pr-verify-linked-issue.yml@main
+    secrets:
+      ORG_PAT: ${{ secrets.ORG_PAT }}
+
+  require-checklist:
+    name: "Require Checklist"
+    if: github.event_name == 'pull_request'
+    uses: Koudmain/.github/.github/workflows/pr-require-checklist.yml@main
+
+  gitlab-mirroring:
+    name: "Gitlab Mirroring"
+    if: inputs.target-repo-url != null && inputs.target-repo-url != ''
+    uses: Koudmain/.github/.github/workflows/gitlab-mirroring.yml@main
+    with:
+      target-repo-url: ${{ inputs.target-repo-url }}
+    secrets:
+      GITLAB_SSH_PRIVATE_KEY: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}

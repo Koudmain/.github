@@ -1,0 +1,28 @@
+name: "Orchestrator - CI"
+
+on:
+  workflow_call:
+    inputs:
+      language:
+        type: string
+        required: true
+      node-version:
+        type: string
+        default: "20"
+      run-quality:
+        type: boolean
+        default: true
+      run-deploy:
+        type: boolean
+        default: false
+    secrets:
+      ORG_PAT:
+        required: false
+
+jobs:
+  code-quality-ts:
+    name: "Code Quality (TypeScript)"
+    if: inputs.run-quality && inputs.language == 'node'
+    uses: Koudmain/.github/.github/workflows/reusable-code-quality.yml@main
+    with:
+      node-version: ${{ inputs.node-version }}
