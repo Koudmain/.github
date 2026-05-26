@@ -61,7 +61,7 @@ jobs:
   gitlab-mirroring:
     name: "Gitlab Mirroring"
     if: inputs.target-repo-url != null && inputs.target-repo-url != ''
-    uses: Koudmain/.github/.github/workflows/gitlab-mirroring.yaml@main
+    uses: Koudmain/.github/.github/workflows/gitlab-mirroring.yml@main
     with:
       target-repo-url: ${{ inputs.target-repo-url }}
     secrets:
