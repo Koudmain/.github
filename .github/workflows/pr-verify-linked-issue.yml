@@ -1,9 +1,6 @@
 name: Verify issue
 
 on:
-  pull_request:
-    types: [edited, synchronize, opened, reopened]
-  check_run:
   workflow_call:
     secrets:
       ORG_PAT:

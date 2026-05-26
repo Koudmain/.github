@@ -1,0 +1,54 @@
+name: "CI Orchestrator"
+
+on:
+  workflow_call:
+    inputs:
+      language:
+        description: "node | go"
+        type: string
+        required: true
+      node-version:
+        type: string
+        default: "20"
+        required: false
+      run-quality:
+        type: boolean
+        default: true
+        required: false
+      run-pr-checks:
+        type: boolean
+        default: true
+        required: false
+      run-deploy:
+        type: boolean
+        default: false
+        required: false
+    secrets:
+      ORG_PAT:
+        required: true
+
+jobs:
+  code-quality-ts:
+    name: "Code Quality (TypeScript)"
+    if: inputs.run-quality && inputs.language == 'node'
+    uses: Koudmain/.github/.github/workflows/reusable-code-quality.yml@main
+    with:
+      node-version: ${{ inputs.node-version }}
+
+  pr-checklist:
+    name: "PR Checklist"
+    if: inputs.run-pr-checks
+    uses: Koudmain/.github/.github/workflows/pr-require-checklist.yml@main
+
+  pr-issue:
+    name: "PR Linked Issue"
+    if: inputs.run-pr-checks
+    uses: Koudmain/.github/.github/workflows/pr-verify-linked-issue.yml@main
+    secrets:
+      ORG_PAT: ${{ secrets.ORG_PAT }}
+
+  add-to-project:
+    name: "Add to Project"
+    uses: Koudmain/.github/.github/workflows/auto-add-project.yml@main
+    secrets:
+      ORG_PAT: ${{ secrets.ORG_PAT }}
