@@ -16,27 +16,35 @@ jobs:
   add-to-project:
     name: "Auto Configure Project"
     if: github.event.action == 'opened'
-    uses: Koudmain/.github/.github/workflows/auto-add-project.yml@main
+    uses: Koudmain/.github/.github/workflows/reusable-auto-project.yml@main
     secrets:
       ORG_PAT: ${{ secrets.ORG_PAT }}
 
   verify-issue:
     name: "Verify Linked Issue"
     if: github.event_name == 'pull_request'
-    uses: Koudmain/.github/.github/workflows/pr-verify-linked-issue.yml@main
+    uses: Koudmain/.github/.github/workflows/reusable-pr-verify-linked-issue.yml@main
     secrets:
       ORG_PAT: ${{ secrets.ORG_PAT }}
 
   require-checklist:
     name: "Require Checklist"
     if: github.event_name == 'pull_request'
-    uses: Koudmain/.github/.github/workflows/pr-require-checklist.yml@main
+    uses: Koudmain/.github/.github/workflows/reusable-pr-require-checklist.yml@main
 
   gitlab-mirroring:
     name: "Gitlab Mirroring"
     if: inputs.target-repo-url != null && inputs.target-repo-url != ''
-    uses: Koudmain/.github/.github/workflows/gitlab-mirroring.yml@main
+    uses: Koudmain/.github/.github/workflows/reusable-gitlab-mirroring.yml@main
     with:
       target-repo-url: ${{ inputs.target-repo-url }}
     secrets:
       GITLAB_SSH_PRIVATE_KEY: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
+
+  label-on-failure:
+    name: "Label PR as 'to fix'"
+    needs: [verify-issue, require-checklist]
+    if: failure() && github.event_name == 'pull_request'
+    uses: Koudmain/.github/.github/workflows/reusable-label-on-failure.yml@main
+    permissions:
+      pull-requests: write

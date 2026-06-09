@@ -9,9 +9,15 @@ on:
       node-version:
         type: string
         default: "24"
-      run-quality:
+      go-version:
+        type: string
+        default: "stable"
+      run-tests:
         type: boolean
-        default: true
+        default: false
+      run-precommit:
+        type: boolean
+        default: false
       run-deploy:
         type: boolean
         default: false
@@ -20,9 +26,36 @@ on:
         required: false
 
 jobs:
-  code-quality-ts:
-    name: "Code Quality (TypeScript)"
-    if: inputs.run-quality && inputs.language == 'node'
-    uses: Koudmain/.github/.github/workflows/reusable-code-quality.yml@main
-    with:
-      node-version: ${{ inputs.node-version }}
+  pre-commit:
+    name: "Pre-commit Checks"
+    if: inputs.run-precommit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        if: inputs.language == 'node'
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: 'npm'
+      - run: npm ci
+        if: inputs.language == 'node'
+
+      - uses: actions/setup-go@v5
+        if: inputs.language == 'go'
+        with:
+          go-version: ${{ inputs.go-version }}
+          cache: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - uses: pre-commit/action@v3.0.1
+
+  label-on-failure:
+    name: "Label PR as 'to fix'"
+    needs: [pre-commit]
+    if: failure() && github.event_name == 'pull_request'
+    uses: Koudmain/.github/.github/workflows/reusable-label-on-failure.yml@main
+    permissions:
+      pull-requests: write
