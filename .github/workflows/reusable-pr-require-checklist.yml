@@ -30,8 +30,6 @@ jobs:
           - Retournez sur la description de la PR
           - Cochez toutes les cases de la checklist
           - La CI se relancera automatiquement après votre modification
-
-          > Si vous pensez que c'est une erreur, vérifiez que votre PR contient bien une checklist avec des cases à cocher (`- [ ]`).
           EOF
           gh pr comment ${{ github.event.pull_request.number }} \
             --body-file /tmp/comment.md \
