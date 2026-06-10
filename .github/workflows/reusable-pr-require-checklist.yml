@@ -7,7 +7,32 @@ jobs:
   require-checklist:
     runs-on: ubuntu-latest
     name: Require Checklist
+    permissions:
+      pull-requests: write
     steps:
-      - uses: mheap/require-checklist-action@v2
+      - name: Check PR checklist
+        id: checklist
+        uses: mheap/require-checklist-action@v2
         with:
           requireChecklist: true
+
+      - name: Comment on PR if checklist is incomplete
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cat << 'EOF' > /tmp/comment.md
+          ❌ **Checklist incomplète**
+
+          La checklist de cette PR n'est pas entièrement complétée. Veuillez cocher toutes les cases avant de merger.
+
+          **Que faire ?**
+          - Retournez sur la description de la PR
+          - Cochez toutes les cases de la checklist
+          - La CI se relancera automatiquement après votre modification
+
+          > Si vous pensez que c'est une erreur, vérifiez que votre PR contient bien une checklist avec des cases à cocher (`- [ ]`).
+          EOF
+          gh pr comment ${{ github.event.pull_request.number }} \
+            --body-file /tmp/comment.md \
+            --repo ${{ github.repository }}
