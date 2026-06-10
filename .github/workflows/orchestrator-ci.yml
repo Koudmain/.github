@@ -56,6 +56,6 @@ jobs:
     name: "Label PR as 'to fix'"
     needs: [pre-commit]
     if: failure() && github.event_name == 'pull_request'
-    uses: Koudmain/.github/.github/workflows/reusable-label-on-failure.yml@main
+    uses: Koudmain/.github/.github/workflows/reusable-label-on-failure.yml@chore/github-ci
     permissions:
       pull-requests: write
