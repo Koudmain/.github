@@ -16,12 +16,12 @@ jobs:
   require-checklist:
     name: "Require Checklist"
     if: github.event_name == 'pull_request'
-    uses: Koudmain/.github/.github/workflows/reusable-pr-require-checklist.yml@chore/github-ci
+    uses: ./.github/workflows/reusable-pr-require-checklist.yml
 
   gitlab-mirroring:
     name: "Gitlab Mirroring"
     if: inputs.target-repo-url != null && inputs.target-repo-url != ''
-    uses: Koudmain/.github/.github/workflows/reusable-gitlab-mirroring.yml@chore/github-ci
+    uses: ./.github/workflows/reusable-gitlab-mirroring.yml
     with:
       target-repo-url: ${{ inputs.target-repo-url }}
     secrets:
@@ -31,6 +31,6 @@ jobs:
     name: "Label PR as 'to fix'"
     needs: [require-checklist]
     if: failure() && github.event_name == 'pull_request'
-    uses: Koudmain/.github/.github/workflows/reusable-label-on-failure.yml@chore/github-ci
+    uses: ./.github/workflows/reusable-label-on-failure.yml
     permissions:
       pull-requests: write
