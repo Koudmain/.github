@@ -73,3 +73,8 @@
 - name: "blocked"
   color: "000000"
   description: "Stalled due to external dependencies or missing information."
+
+# --- ACTIONS ---
+- name: "force ci"
+  color: "ff6600"
+  description: "Manually trigger full CI pipeline on this PR."

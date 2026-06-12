@@ -1,0 +1,36 @@
+name: "Orchestrator - Events & Automation"
+
+on:
+  workflow_call:
+    inputs:
+      target-repo-url:
+        type: string
+        required: false
+    secrets:
+      ORG_PAT:
+        required: true
+      GITLAB_SSH_PRIVATE_KEY:
+        required: true
+
+jobs:
+  require-checklist:
+    name: "Require Checklist"
+    if: github.event_name == 'pull_request'
+    uses: ./.github/workflows/reusable-pr-require-checklist.yml
+
+  gitlab-mirroring:
+    name: "Gitlab Mirroring"
+    if: inputs.target-repo-url != null && inputs.target-repo-url != ''
+    uses: ./.github/workflows/reusable-gitlab-mirroring.yml
+    with:
+      target-repo-url: ${{ inputs.target-repo-url }}
+    secrets:
+      GITLAB_SSH_PRIVATE_KEY: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
+
+  label-on-failure:
+    name: "Label PR as 'to fix'"
+    needs: [require-checklist]
+    if: failure() && github.event_name == 'pull_request'
+    uses: ./.github/workflows/reusable-label-on-failure.yml
+    permissions:
+      pull-requests: write

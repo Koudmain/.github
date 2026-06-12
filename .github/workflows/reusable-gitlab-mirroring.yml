@@ -1,0 +1,26 @@
+name: Gitlab Mirroring
+
+on:
+  workflow_call:
+    inputs:
+      target-repo-url:
+        required: true
+        type: string
+    secrets:
+      GITLAB_SSH_PRIVATE_KEY:
+        required: true
+
+jobs:
+  gitlab-mirroring:
+    name: Gitlab Mirroring
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: pixta-dev/repository-mirroring-action@v1
+        with:
+          target_repo_url: ${{ inputs.target-repo-url }}
+          ssh_private_key: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
