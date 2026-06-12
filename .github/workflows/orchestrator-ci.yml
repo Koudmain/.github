@@ -47,6 +47,12 @@ jobs:
           go-version: ${{ inputs.go-version }}
           cache: true
 
+      - uses: golangci/golangci-lint-action@v8
+        if: inputs.language == 'go'
+        with:
+          version: v2.11.3
+          install-mode: binary
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.x'
