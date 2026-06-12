@@ -47,7 +47,7 @@ jobs:
           go-version: ${{ inputs.go-version }}
           cache: true
 
-      - uses: golangci/golangci-lint-action@v6
+      - uses: golangci/golangci-lint-action@v7
         if: inputs.language == 'go'
         with:
           version: v2.1.6
