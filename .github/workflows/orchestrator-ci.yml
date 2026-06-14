@@ -26,43 +26,23 @@ on:
         required: false
 
 jobs:
-  pre-commit:
-    name: "Pre-commit Checks"
-    if: inputs.run-precommit
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+  pre-commit-go:
+    name: "Pre-commit Checks (Go)"
+    if: inputs.run-precommit && inputs.language == 'go'
+    uses: ./.github/workflows/reusable-precommit-go.yml
+    with:
+      go-version: ${{ inputs.go-version }}
 
-      - uses: actions/setup-node@v4
-        if: inputs.language == 'node'
-        with:
-          node-version: ${{ inputs.node-version }}
-          cache: 'npm'
-      - run: npm ci
-        if: inputs.language == 'node'
-
-      - uses: actions/setup-go@v5
-        if: inputs.language == 'go'
-        with:
-          go-version: ${{ inputs.go-version }}
-          cache: true
-
-      - uses: golangci/golangci-lint-action@v8
-        if: inputs.language == 'go'
-        with:
-          version: v2.12.2
-          install-mode: binary
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-      - uses: pre-commit/action@v3.0.1
-        with:
-          extra_args: --all-files
+  pre-commit-node:
+    name: "Pre-commit Checks (Node)"
+    if: inputs.run-precommit && inputs.language == 'node'
+    uses: ./.github/workflows/reusable-precommit-node.yml
+    with:
+      node-version: ${{ inputs.node-version }}
 
   label-on-failure:
     name: "Label PR as 'to fix'"
-    needs: [pre-commit]
+    needs: [pre-commit-go, pre-commit-node]
     if: failure() && github.event_name == 'pull_request'
     uses: ./.github/workflows/reusable-label-on-failure.yml
     permissions:

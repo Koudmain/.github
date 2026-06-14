@@ -1,0 +1,32 @@
+name: "Reusable - Pre-commit (Go)"
+
+on:
+  workflow_call:
+    inputs:
+      go-version:
+        type: string
+        default: "stable"
+
+jobs:
+  pre-commit:
+    name: "Pre-commit Checks (Go)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ inputs.go-version }}
+          cache: true
+
+      - name: Install golangci-lint
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh \
+            | sh -s -- -b $(go env GOPATH)/bin v2.12.2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: --all-files
