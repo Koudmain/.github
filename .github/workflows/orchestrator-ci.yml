@@ -62,5 +62,20 @@ jobs:
         run: |
           gh pr edit ${{ github.event.pull_request.number }} \
             --remove-label "force ci" \
+            --repo ${{ github.repository }} || true
+
+  remove-to-merge-label:
+    name: "Remove 'to merge' label"
+    needs: [pre-commit-go, pre-commit-node]
+    if: failure() && github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Remove "to merge" label
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr edit ${{ github.event.pull_request.number }} \
             --remove-label "to merge" \
             --repo ${{ github.repository }} || true
