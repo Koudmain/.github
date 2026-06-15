@@ -62,4 +62,5 @@ jobs:
         run: |
           gh pr edit ${{ github.event.pull_request.number }} \
             --remove-label "force ci" \
+            --remove-label "to merge" \
             --repo ${{ github.repository }} || true
