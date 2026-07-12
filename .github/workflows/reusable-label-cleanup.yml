@@ -11,7 +11,9 @@ jobs:
   label-on-failure:
     name: "Label PR as 'to fix'"
     if: inputs.ci-failed && github.event_name == 'pull_request'
-    uses: ./.github/workflows/reusable-label-on-failure.yml
+    uses: ./.github/workflows/reusable-add-label.yml
+    with:
+      label: "to fix"
     permissions:
       pull-requests: write
 
