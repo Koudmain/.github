@@ -1,19 +1,23 @@
-name: "Reusable - Label PR on Failure"
+name: "Reusable - Add Label on PR"
 
 on:
   workflow_call:
+    inputs:
+      label:
+        type: string
+        required: true
 
 jobs:
   add-label:
-    name: "Add 'to fix' label"
+    name: "Add label"
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
     steps:
-      - name: Add "to fix" label
+      - name: Add "${{ inputs.label }}" label
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh pr edit ${{ github.event.pull_request.number }} \
-            --add-label "to fix" \
+            --add-label "${{ inputs.label }}" \
             --repo ${{ github.repository }}
