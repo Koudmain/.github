@@ -31,6 +31,8 @@ jobs:
     name: "Label PR as 'to fix'"
     needs: [require-checklist]
     if: failure() && github.event_name == 'pull_request'
-    uses: ./.github/workflows/reusable-label-on-failure.yml
+    uses: ./.github/workflows/reusable-add-label.yml
+    with:
+      label: "to fix"
     permissions:
       pull-requests: write
